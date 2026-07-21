@@ -1,23 +1,23 @@
 const CONFIG = {
   // Set date (Year, Month (0-11), Day, Hour, Minute, Second)
   // Note: Month is 0-indexed (0 = January, 11 = December)
-  targetDate: new Date(
-    new Date().getFullYear(),
-    new Date().getMonth(),
-    new Date().getDate() + 0,
-    0,
-    0,
-    0,
-  ),
   // targetDate: new Date(
-  //   2026,
-  //   6,
-  //   25,
-  //   0, // Jam
-  //   0, // Menit
-  //   0, // Detik
+  //   new Date().getFullYear(),
+  //   new Date().getMonth(),
+  //   new Date().getDate() + 0,
+  //   0,
+  //   0,
+  //   0,
   // ),
-  loveLetter: `Untuk orang yang paling spesial,\n\nSelamat ulang tahun! 🎉\n\nHari ini adalah hari di mana dunia menjadi sedikit lebih indah karena kamu lahir. Aku sangat bersyukur bisa mengenalmu dan menjadi bagian dari hidupmu.\nSemoga semua doa, harapan, dan impianmu perlahan menjadi nyata. Jangan pernah berubah, tetaplah menjadi seseorang yang ceria, penuh kasih, dan selalu membawa kebahagiaan bagi orang-orang di sekitarmu.\nTerima kasih atas segala kenangan indah yang telah kita buat bersama. Mari buat lebih banyak lagi di tahun-tahun mendatang.\n\nI love you more than words can say. ❤️`,
+  targetDate: new Date(
+    2026,
+    6,
+    25,
+    0, // Jam
+    0, // Menit
+    0, // Detik
+  ),
+  loveLetter: `Untuk perempuan yang selalu berhasil membuat hariku terasa lebih indah. ❤️\n\nSelamat ulang tahun, sayangku. 🎂✨\n\nHari ini adalah hari di mana seseorang yang paling berharga dalam hidupku dilahirkan. Aku benar-benar bersyukur karena semesta mempertemukan kita. Terima kasih sudah hadir, sudah bertahan, dan sudah menjadi alasan di balik begitu banyak senyum yang selalu muncul setiap kali aku mengingatmu.\n\nDi hari spesialmu ini, aku hanya ingin kamu tahu bahwa kamu sangat berharga. Semoga semua doa, harapan, dan impianmu satu per satu menjadi kenyataan. Semoga kamu selalu diberi kesehatan, kebahagiaan, dan dikelilingi oleh orang-orang yang tulus menyayangimu.\n\nTerima kasih sudah menjadi tempat pulang, tempat bercerita, dan seseorang yang selalu ingin aku perjuangkan. Bersamamu, hal-hal sederhana terasa begitu istimewa. Tawa kecilmu, perhatianmu, bahkan caramu memanggil namaku selalu berhasil membuatku jatuh cinta berulang kali.\n\nAku mungkin bukan orang yang sempurna, tapi aku berjanji akan selalu berusaha menjadi seseorang yang bisa membuatmu merasa dicintai setiap hari.\n\nKalau suatu saat nanti kamu lupa betapa berharganya dirimu, ingatlah bahwa akan selalu ada seseorang yang memandangmu sebagai anugerah terindah dalam hidupnya.\n\nHappy Birthday, cintaku. ❤️\n\nI love you.\nYesterday.\nToday.\nTomorrow.\nAnd Forever. 💕`,
   galleryImages: [
     {
       src: "assets/images/7.jpg",
@@ -505,11 +505,63 @@ class GiftAnimation {
   }
 
   init() {
+    this.clickCount = 0;
+    this.subtitle = document.querySelector("#gift-section .subtitle");
+
     this.giftBox.addEventListener("click", () => {
       if (this.opened) return;
-      this.opened = true;
-      this.openGift();
+
+      this.clickCount++;
+
+      if (this.clickCount < 4) {
+        this.dodge();
+      } else {
+        this.opened = true;
+        this.resetPosition();
+        setTimeout(() => this.openGift(), 300); // small delay after resetting to center
+      }
     });
+  }
+
+  dodge() {
+    const maxTranslateX = window.innerWidth > 600 ? 350 : 160;
+    const maxTranslateY = window.innerHeight > 600 ? 250 : 140;
+
+    // Ensure it jumps a minimum distance away (at least half of max)
+    const minTranslateX = maxTranslateX / 2;
+    const minTranslateY = maxTranslateY / 2;
+
+    const randomX =
+      (Math.random() < 0.5 ? -1 : 1) *
+      (Math.random() * (maxTranslateX - minTranslateX) + minTranslateX);
+    const randomY =
+      (Math.random() < 0.5 ? -1 : 1) *
+      (Math.random() * (maxTranslateY - minTranslateY) + minTranslateY);
+
+    const messages = [
+      "Eits, gak kena! 😛",
+      "Ayo coba lagi! 😆",
+      "Kurang cepet! 😂",
+    ];
+
+    if (this.subtitle) {
+      this.subtitle.innerText = messages[this.clickCount - 1] || messages[0];
+      this.subtitle.classList.remove("animate-pulse"); // Stop pulsing to focus on the text
+    }
+
+    this.giftBox.style.transition =
+      "top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+    this.giftBox.style.top = `${randomY}px`;
+    this.giftBox.style.left = `${randomX}px`;
+  }
+
+  resetPosition() {
+    if (this.subtitle) {
+      this.subtitle.innerText = "Akhirnya dapet juga! 🎁";
+    }
+    this.giftBox.style.transition = "top 0.3s ease, left 0.3s ease";
+    this.giftBox.style.top = "0px";
+    this.giftBox.style.left = "0px";
   }
 
   openGift() {
@@ -569,16 +621,22 @@ class TypingEffect {
 
   type() {
     if (this.index < this.text.length) {
-      const char =
-        this.text.charAt(this.index) === "\n"
-          ? "<br>"
-          : this.text.charAt(this.index);
+      let charsToType = this.speed <= 20 ? 3 : 1;
+      let str = "";
+      while (charsToType > 0 && this.index < this.text.length) {
+        str +=
+          this.text.charAt(this.index) === "\n"
+            ? "<br>"
+            : this.text.charAt(this.index);
+        this.index++;
+        charsToType--;
+      }
+
       const currentHTML = this.element.innerHTML;
       this.element.innerHTML = currentHTML.replace(
         '<span class="cursor-type"></span>',
-        char + '<span class="cursor-type"></span>',
+        str + '<span class="cursor-type"></span>',
       );
-      this.index++;
       setTimeout(() => this.type(), this.speed);
     } else {
       this.element.innerHTML = this.element.innerHTML.replace(
@@ -981,6 +1039,9 @@ class App {
       fromSection.classList.add("hidden");
       fromSection.classList.remove("active");
 
+      // Scroll to top instantly when the new section appears
+      window.scrollTo(0, 0);
+
       toSection.classList.remove("hidden");
       toSection.style.opacity = "0";
 
@@ -1019,7 +1080,7 @@ class App {
         const typer = new TypingEffect(
           "typing-text",
           CONFIG.loveLetter,
-          50,
+          25,
           () => {
             document
               .getElementById("btn-next-gallery")

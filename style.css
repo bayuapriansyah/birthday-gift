@@ -1305,3 +1305,84 @@ body.lightbox-open .cursor-ripple {
     transform: translateY(110vh) rotate(360deg);
   }
 }
+
+/* Letter Paper Styling */
+.paper-card {
+  background-color: #fdfaf6;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(160, 122, 120, 0.15) 31px,
+    rgba(160, 122, 120, 0.15) 32px
+  );
+  color: #2c2c2c;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 0 40px rgba(230,220,210,0.5);
+  position: relative;
+  border: 1px solid #e8e2db;
+  padding: 64px clamp(1.5rem, 5vw, 3rem) 64px clamp(3.5rem, 8vw, 4.5rem);
+  text-align: left;
+}
+
+.paper-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(2rem, 5vw, 3rem);
+  width: 2px;
+  background: rgba(220, 100, 100, 0.25);
+  z-index: 0;
+}
+
+.paper-card::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: clamp(0.5rem, 2vw, 15px);
+  font-family: var(--font-title);
+  font-size: clamp(4rem, 10vw, 6rem);
+  color: var(--c-primary);
+  opacity: 0.15;
+  line-height: 1;
+  z-index: 0;
+}
+
+.paper-card .overline {
+  color: #a07a78;
+  position: absolute;
+  top: 32px;
+  left: clamp(3.5rem, 8vw, 4.5rem);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 32px;
+  z-index: 1;
+}
+
+.paper-card .letter-content {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  line-height: 32px;
+  color: #3b3b3b;
+  position: relative;
+  z-index: 1;
+  text-shadow: none;
+  min-height: 200px;
+}
+
+/* Fix button visibility inside light card */
+.paper-card .btn-primary {
+  background: #a07a78;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(160, 122, 120, 0.3);
+  position: relative;
+  z-index: 2;
+  text-shadow: none;
+}
+
+.paper-card .btn-primary:hover {
+  background: #8b6866;
+  box-shadow: 0 6px 20px rgba(160, 122, 120, 0.4);
+}
