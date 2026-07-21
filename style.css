@@ -290,7 +290,7 @@ button {
   background-color: var(--c-accent);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 200000;
   transform: translate(-50%, -50%);
   transition:
     width 0.2s,
@@ -310,7 +310,7 @@ button {
   border-radius: 50%;
   border: 2px solid var(--c-accent);
   pointer-events: none;
-  z-index: 9999;
+  z-index: 199999;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
 }
@@ -679,7 +679,17 @@ input[type="range"]::-webkit-slider-runnable-track {
   width: 160px;
   transition: transform 0.3s;
   z-index: 5;
-  pointer-events: none;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+}
+.polaroid-scatter.dragging {
+  animation: none;
+  cursor: grabbing;
+  transform: rotate(var(--rot)) scale(1.04);
+  transition: none;
+  z-index: 30;
 }
 .img-ph {
   width: 100%;
@@ -806,6 +816,10 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* Lightbox */
 .lightbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
@@ -814,11 +828,23 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: rgba(15, 10, 13, 0.95);
   z-index: 100000;
   backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+.lightbox.is-open {
+  display: flex;
+}
+body.lightbox-open .custom-cursor,
+body.lightbox-open .cursor-ripple {
+  mix-blend-mode: normal;
 }
 .lightbox-content {
   position: relative;
   max-width: 90%;
   max-height: 90%;
+}
+.lightbox.is-open .lightbox-content {
+  opacity: 1;
+  transform: scale(1);
 }
 .lightbox-content img {
   max-width: 100%;

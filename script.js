@@ -19,21 +19,81 @@ const CONFIG = {
   // ),
   loveLetter: `Untuk orang yang paling spesial,\n\nSelamat ulang tahun! 🎉\n\nHari ini adalah hari di mana dunia menjadi sedikit lebih indah karena kamu lahir. Aku sangat bersyukur bisa mengenalmu dan menjadi bagian dari hidupmu.\nSemoga semua doa, harapan, dan impianmu perlahan menjadi nyata. Jangan pernah berubah, tetaplah menjadi seseorang yang ceria, penuh kasih, dan selalu membawa kebahagiaan bagi orang-orang di sekitarmu.\nTerima kasih atas segala kenangan indah yang telah kita buat bersama. Mari buat lebih banyak lagi di tahun-tahun mendatang.\n\nI love you more than words can say. ❤️`,
   galleryImages: [
-    { src: "assets/images/placeholder1.jpg", caption: "Our First Meeting" },
-    { src: "assets/images/placeholder2.jpg", caption: "Sweet Smile" },
-    { src: "assets/images/placeholder1.jpg", caption: "Beautiful Day" },
-    { src: "assets/images/placeholder2.jpg", caption: "Together" },
-    { src: "assets/images/placeholder1.jpg", caption: "Memories" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
-    { src: "assets/images/placeholder2.jpg", caption: "Forever" },
+    {
+      src: "assets/images/7.jpg",
+      thumb: "assets/images/thumbs/7.jpg",
+      caption: "Centil Mode: ON 🤏",
+    },
+    {
+      src: "assets/images/9.jpg",
+      thumb: "assets/images/thumbs/9.jpg",
+      caption: "Cakep Banget 🥹",
+    },
+    {
+      src: "assets/images/8.jpg",
+      thumb: "assets/images/thumbs/8.jpg",
+      caption: "Bisa munduran dikit ga kak? soalnya cantiknya kelewatan 😵‍💫",
+    },
+    {
+      src: "assets/images/18.jpg",
+      thumb: "assets/images/thumbs/18.jpg",
+      caption: "Kece badaiii 🫣",
+    },
+    {
+      src: "assets/images/11.jpg",
+      thumb: "assets/images/thumbs/11.jpg",
+      caption: "Lucu Banget Ya Allah 🥹",
+    },
+    {
+      src: "assets/images/12.jpg",
+      thumb: "assets/images/thumbs/12.jpg",
+      caption: "Bocil Kesayangan 💕",
+    },
+    {
+      src: "assets/images/14.jpg",
+      thumb: "assets/images/thumbs/14.jpg",
+      caption: "Cantik Tanpa Izin 😤",
+    },
+    {
+      src: "assets/images/13.jpg",
+      thumb: "assets/images/thumbs/13.jpg",
+      caption: "Kamera depan atau masa depan? 😆",
+    },
+    {
+      src: "assets/images/15.jpg",
+      thumb: "assets/images/thumbs/15.jpg",
+      caption: "Ekspresi Favoritku 🤍",
+    },
+    {
+      src: "assets/images/16.jpg",
+      thumb: "assets/images/thumbs/16.jpg",
+      caption: "Gemes Level Maksimal 🫶",
+    },
+    {
+      src: "assets/images/17.jpg",
+      thumb: "assets/images/thumbs/17.jpg",
+      caption: "Cakep Terus Capek Gak? 😌",
+    },
+    {
+      src: "assets/images/20.jpg",
+      thumb: "assets/images/thumbs/20.jpg",
+      caption: "Si Paling Manis 🍯",
+    },
+    {
+      src: "assets/images/21.jpg",
+      thumb: "assets/images/thumbs/21.jpg",
+      caption: "Mukanya Bikin Kangen 🥺",
+    },
+    {
+      src: "assets/images/19.jpg",
+      thumb: "assets/images/thumbs/19.jpg",
+      caption: "Kalau Gini Siapa yang Gak Gemes? 🤭",
+    },
+    {
+      src: "assets/images/26.jpg",
+      thumb: "assets/images/thumbs/26.jpg",
+      caption: "Endingnya Tetap Aku Sayang Kamu ❤️",
+    },
   ],
 };
 
@@ -42,7 +102,7 @@ class CursorController {
     this.cursor = document.getElementById("cursor");
     this.ripple = document.getElementById("cursor-ripple");
     this.hoverElements = document.querySelectorAll(
-      'button, .gallery-item, .polaroid-inner, input[type="range"]',
+      'button, .gallery-item, .polaroid-scatter, input[type="range"]',
     );
 
     this.init();
@@ -82,7 +142,7 @@ class CursorController {
 
   refreshHoverElements() {
     this.hoverElements = document.querySelectorAll(
-      'button, .gallery-item, .polaroid-inner, input[type="range"]',
+      'button, .gallery-item, .polaroid-scatter, input[type="range"]',
     );
     this.addHoverEffects();
   }
@@ -548,9 +608,14 @@ class Gallery {
   }
 
   render() {
+    this.grid.innerHTML = "";
+
     CONFIG.galleryImages.forEach((img, index) => {
       const item = document.createElement("div");
       item.className = "gallery-item";
+      item.dataset.index = index;
+      item.setAttribute("role", "button");
+      item.setAttribute("tabindex", "0");
 
       // Random rotation between -15 and 15 degrees
       const rot = Math.random() * 30 - 15;
@@ -559,16 +624,29 @@ class Gallery {
 
       // Setup fallback image handling
       const html = `
-                <img src="${img.src}" alt="${img.caption}" loading="lazy" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOEI1QTc1Ii8+PC9zdmc+'">
+                <img src="${img.thumb || img.src}" alt="${img.caption}" loading="lazy" decoding="async" onclick="openGalleryPhoto(${index})" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOEI1QTc1Ii8+PC9zdmc+'">
                 <div class="caption">${img.caption}</div>
             `;
       item.innerHTML = html;
-      item.addEventListener("click", () => this.openLightbox(index));
       this.grid.appendChild(item);
     });
   }
 
   setupLightbox() {
+    this.grid.addEventListener("click", (e) => {
+      const item = e.target.closest(".gallery-item");
+      if (!item) return;
+      this.openLightbox(Number(item.dataset.index));
+    });
+
+    this.grid.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const item = e.target.closest(".gallery-item");
+      if (!item) return;
+      e.preventDefault();
+      this.openLightbox(Number(item.dataset.index));
+    });
+
     document
       .getElementById("lightbox-close")
       .addEventListener("click", () => this.closeLightbox());
@@ -591,10 +669,20 @@ class Gallery {
     this.currentIndex = index;
     this.updateLightboxContent();
     this.lightbox.classList.remove("hidden");
+    this.lightbox.classList.add("is-open");
+    this.lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lightbox-open");
+    this.lightbox.querySelector(".lightbox-content")?.classList.add("animated");
   }
 
   closeLightbox() {
     this.lightbox.classList.add("hidden");
+    this.lightbox.classList.remove("is-open");
+    this.lightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lightbox-open");
+    this.lightbox
+      .querySelector(".lightbox-content")
+      ?.classList.remove("animated");
   }
 
   navigate(dir) {
@@ -726,6 +814,69 @@ class ScrollAnimation {
   }
 }
 
+class DraggablePolaroids {
+  constructor() {
+    this.items = document.querySelectorAll(".polaroid-scatter");
+    this.activeItem = null;
+    this.offsetX = 0;
+    this.offsetY = 0;
+    this.init();
+  }
+
+  init() {
+    this.items.forEach((item) => {
+      item.addEventListener("pointerdown", (e) => this.startDrag(e, item));
+    });
+  }
+
+  startDrag(e, item) {
+    const section = item.closest(".section");
+    const sectionRect = section.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+
+    this.activeItem = item;
+    this.offsetX = e.clientX - itemRect.left;
+    this.offsetY = e.clientY - itemRect.top;
+
+    item.style.left = `${itemRect.left - sectionRect.left}px`;
+    item.style.top = `${itemRect.top - sectionRect.top}px`;
+    item.style.right = "auto";
+    item.style.bottom = "auto";
+    item.classList.add("dragging");
+    item.setPointerCapture(e.pointerId);
+
+    item.addEventListener("pointermove", this.drag);
+    item.addEventListener("pointerup", this.stopDrag);
+    item.addEventListener("pointercancel", this.stopDrag);
+  }
+
+  drag = (e) => {
+    if (!this.activeItem) return;
+
+    const section = this.activeItem.closest(".section");
+    const sectionRect = section.getBoundingClientRect();
+    const itemRect = this.activeItem.getBoundingClientRect();
+    const maxLeft = sectionRect.width - itemRect.width;
+    const maxTop = sectionRect.height - itemRect.height;
+    const nextLeft = e.clientX - sectionRect.left - this.offsetX;
+    const nextTop = e.clientY - sectionRect.top - this.offsetY;
+
+    this.activeItem.style.left = `${Math.max(0, Math.min(maxLeft, nextLeft))}px`;
+    this.activeItem.style.top = `${Math.max(0, Math.min(maxTop, nextTop))}px`;
+  };
+
+  stopDrag = (e) => {
+    if (!this.activeItem) return;
+
+    this.activeItem.releasePointerCapture(e.pointerId);
+    this.activeItem.removeEventListener("pointermove", this.drag);
+    this.activeItem.removeEventListener("pointerup", this.stopDrag);
+    this.activeItem.removeEventListener("pointercancel", this.stopDrag);
+    this.activeItem.classList.remove("dragging");
+    this.activeItem = null;
+  };
+}
+
 class App {
   constructor() {
     this.loadingScreen = document.getElementById("loading-screen");
@@ -743,6 +894,8 @@ class App {
       ending: document.getElementById("ending-section"),
     };
 
+    this.gallery = null;
+
     this.init();
   }
 
@@ -753,6 +906,7 @@ class App {
     this.petals = new FallingPetals();
     this.bokeh = new BokehHearts();
     this.music = new MusicPlayer();
+    this.draggablePolaroids = new DraggablePolaroids();
 
     // Start Loading Process
     await this.simulateLoading();
@@ -884,7 +1038,9 @@ class App {
       .getElementById("btn-next-gallery")
       .addEventListener("click", () => {
         this.transitionSection(this.sections.letter, this.sections.gallery);
-        new Gallery();
+        if (!this.gallery) {
+          this.gallery = new Gallery();
+        }
       });
 
     // Gallery -> Video
@@ -1004,3 +1160,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start App
   window.birthdayApp = new App();
 });
+
+window.openGalleryPhoto = function (index) {
+  if (window.birthdayApp?.gallery) {
+    window.birthdayApp.gallery.openLightbox(index);
+    return;
+  }
+
+  const img = CONFIG.galleryImages[index];
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const caption = document.getElementById("lightbox-caption");
+
+  if (!img || !lightbox || !lightboxImg) return;
+
+  lightboxImg.onerror = () => {
+    lightboxImg.src =
+      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOEI1QTc1Ii8+PC9zdmc+";
+  };
+  lightboxImg.src = img.src;
+  if (caption) caption.innerText = img.caption;
+
+  lightbox.classList.remove("hidden");
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("lightbox-open");
+  lightbox.querySelector(".lightbox-content")?.classList.add("animated");
+};
