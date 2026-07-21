@@ -1,6 +1,5 @@
-// 1. UTILITIES & CONFIG
 const CONFIG = {
-  // Set to your target date (Year, Month (0-11), Day, Hour, Minute, Second)
+  // Set date (Year, Month (0-11), Day, Hour, Minute, Second)
   // Note: Month is 0-indexed (0 = January, 11 = December)
   targetDate: new Date(
     new Date().getFullYear(),
@@ -10,6 +9,14 @@ const CONFIG = {
     0,
     0,
   ),
+  // targetDate: new Date(
+  //   2026,
+  //   6,
+  //   25,
+  //   0, // Jam
+  //   0, // Menit
+  //   0, // Detik
+  // ),
   loveLetter: `Untuk orang yang paling spesial,\n\nSelamat ulang tahun! 🎉\n\nHari ini adalah hari di mana dunia menjadi sedikit lebih indah karena kamu lahir. Aku sangat bersyukur bisa mengenalmu dan menjadi bagian dari hidupmu.\nSemoga semua doa, harapan, dan impianmu perlahan menjadi nyata. Jangan pernah berubah, tetaplah menjadi seseorang yang ceria, penuh kasih, dan selalu membawa kebahagiaan bagi orang-orang di sekitarmu.\nTerima kasih atas segala kenangan indah yang telah kita buat bersama. Mari buat lebih banyak lagi di tahun-tahun mendatang.\n\nI love you more than words can say. ❤️`,
   galleryImages: [
     { src: "assets/images/placeholder1.jpg", caption: "Our First Meeting" },
@@ -29,10 +36,6 @@ const CONFIG = {
     { src: "assets/images/placeholder2.jpg", caption: "Forever" },
   ],
 };
-
-// ==========================================
-// 2. CLASSES
-// ==========================================
 
 class CursorController {
   constructor() {
@@ -556,7 +559,7 @@ class Gallery {
 
       // Setup fallback image handling
       const html = `
-                <img src="${img.src}" alt="${img.caption}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOEI1QTc1Ii8+PC9zdmc+'">
+                <img src="${img.src}" alt="${img.caption}" loading="lazy" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOEI1QTc1Ii8+PC9zdmc+'">
                 <div class="caption">${img.caption}</div>
             `;
       item.innerHTML = html;
@@ -994,9 +997,6 @@ class App {
   }
 }
 
-// ==========================================
-// 3. INITIALIZATION
-// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
   // Lock scroll initially
   document.body.style.overflowY = "hidden";

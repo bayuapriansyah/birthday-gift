@@ -41,7 +41,14 @@
     </div>
     <div id="bokeh-container"></div>
     <div id="particles-container"></div>
-    <div id="petals-container"></div>
+    <!-- <div id="petals-container"></div> -->
+    <div class="floating-flowers">
+        <span class="flower f1">🌸</span>
+        <span class="flower f2">🌼</span>
+        <span class="flower f3">🌺</span>
+        <span class="flower f4">🌷</span>
+        <span class="flower f5">🌻</span>
+    </div>
 
     <!-- Loading Screen -->
     <div id="loading-screen" class="screen flex-center">
@@ -71,7 +78,7 @@
         <section id="hero-section" class="section flex-center active">
             <div class="container text-center">
                 <p class="overline animate-fade-up">✨ MENGHITUNG HARI ✨</p>
-                <h1 class="title animate-fade-up delay-1">Your Special Day<br><span class="italic">is Coming</span></h1>
+                <h1 class="title animate-fade-up delay-1 text-glow">Your Special Day<br><span class="italic">is Coming</span></h1>
                 <p class="subtitle mt-4 animate-fade-up delay-2">Sesuatu yang indah sedang menunggu untukmu 💕</p>
                 
                 <div id="countdown-container" class="countdown animate-fade-up delay-3 mt-8">
@@ -113,7 +120,7 @@
         <!-- SECTION 2: Gift Opening -->
         <section id="gift-section" class="section flex-center hidden">
             <div class="container text-center">
-                <p class="overline animate-fade-up">🎀 ADA SESUATU UNTUKMU 🎀</p>
+                <p class="overline animate-fade-up tittle">🎀 ADA SESUATU UNTUKMU 🎀</p>
                 <div class="gift-wrapper animate-float mt-8" id="gift-box">
                     <svg class="gift-icon" viewBox="0 0 100 100">
                         <defs>
@@ -145,17 +152,16 @@
         <!-- SECTION 3: Welcome -->
         <section id="welcome-section" class="section flex-center hidden relative">
             <!-- Scattered Polaroids -->
-            <div class="polaroid-scatter p-1 animate-zoom delay-1"><div class="img-ph img-1"></div></div>
-            <div class="polaroid-scatter p-2 animate-zoom delay-2"><div class="img-ph img-2"></div></div>
-            <div class="polaroid-scatter p-3 animate-zoom delay-3"><div class="img-ph img-1"></div></div>
-            <div class="polaroid-scatter p-4 animate-zoom delay-1"><div class="img-ph img-2"></div></div>
-            <div class="polaroid-scatter p-5 animate-zoom delay-3"><div class="img-ph img-1"></div></div>
-            <div class="polaroid-scatter p-6 animate-zoom delay-2"><div class="img-ph img-2"></div></div>
-
+            <div class="polaroid-scatter p-1 polaroid-anim"><div class="img-ph" style="background-image: url('assets/images/1.jpg')"></div></div>
+            <div class="polaroid-scatter p-2 polaroid-anim" style="animation-delay: 0.5s"><div class="img-ph" style="background-image: url('assets/images/2.jpg')"></div></div>
+            <div class="polaroid-scatter p-3 polaroid-anim" style="animation-delay: 1s"><div class="img-ph" style="background-image: url('assets/images/3.jpg')"></div></div>
+            <div class="polaroid-scatter p-4 polaroid-anim" style="animation-delay: 1.5s"><div class="img-ph" style="background-image: url('assets/images/4.jpg')"></div></div>
+            <div class="polaroid-scatter p-5 polaroid-anim" style="animation-delay: 2s"><div class="img-ph" style="background-image: url('assets/images/5.jpg')"></div></div>
+            <div class="polaroid-scatter p-6 polaroid-anim" style="animation-delay: 2.5s"><div class="img-ph" style="background-image: url('assets/images/6.jpg')"></div></div>
             <div class="container text-center z-10">
                 <p class="overline animate-fade-up">💌 A LOVE LETTER FOR YOU</p>
-                <h2 class="title large-title animate-fade-up delay-1">Your<br>Special Day</h2>
-                <p class="subtitle text-sm animate-fade-up delay-2 mt-4 italic font-serif">Created with love, just for you</p>
+                <h2 class="title large-title animate-fade-up delay-1 text-glow">Your<br>Special Day</h2>
+                <p class="subtitle text-sm animate-fade-up delay-2 mt-4 italic font-serif glow-text">Created with love, just for you</p>
                 <button id="btn-read-letter" class="btn-primary mt-8 animate-fade-up delay-3 hover-scale glow-effect">📖 BACA SURATKU 📖</button>
             </div>
         </section>
@@ -196,7 +202,7 @@
                 
                 <div class="custom-video-player glass-card animate-zoom delay-2 padding-none overflow-hidden relative group">
                     <video id="special-video" preload="metadata">
-                        <source src="assets/video/sample.mp4" type="video/mp4">
+                        <source src="assets/video/1.mp4" type="video/mp4">
                         Your browser does not support HTML5 video.
                     </video>
                     <div class="video-overlay" id="video-overlay">
@@ -221,10 +227,9 @@
 
         <!-- SECTION 7: Birthday Wishes -->
         <section id="wishes-section" class="section hidden flex-center">
+              <h2 class="title mb-4 animate-fade-up text-glow">Wishes</h2>
             <div class="container max-w-lg">
                 <div class="glass-card padding-lg text-center animate-zoom w-full">
-                    <p class="overline mb-6">🌟 WISHES
-                         🌟</p>
                     <div class="wishes-content" id="wishes-text">
                         <p class="fade-in-wish" style="--delay: 0.5s">Selamat ulang tahun orang baik...</p>
                         <p class="fade-in-wish" style="--delay: 1.5s">Semoga di umur yang baru ini,</p>
