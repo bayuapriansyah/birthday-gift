@@ -1,22 +1,22 @@
 const CONFIG = {
   // Set date (Year, Month (0-11), Day, Hour, Minute, Second)
   // Note: Month is 0-indexed (0 = January, 11 = December)
-   targetDate: new Date(
-   new Date().getFullYear(),
-   new Date().getMonth(),
-   new Date().getDate() + 0,
-   0,
-   0,
-   0,
-   ),
-  // targetDate: new Date(
-  // 2026,
-  // 6,
-  // 25,
-  // 0, // Jam
-  // 0, // Menit
-  // 0, // Detik
- // ),
+   // targetDate: new Date(
+  // new Date().getFullYear(),
+ //  new Date().getMonth(),
+ //  new Date().getDate() + 0,
+  // 0,
+  // 0,
+  // 0,
+ //  ),
+  targetDate: new Date(
+   2026,
+   6,
+   25,
+   0, // Jam
+   0, // Menit
+   0, // Detik
+  ),
   loveLetter: `Untuk perempuan yang selalu berhasil membuat hariku terasa lebih indah. ❤️\n\nSelamat ulang tahun, sayangku. 🎂✨\n\nHari ini adalah hari di mana seseorang yang paling berharga dalam hidupku dilahirkan. Aku benar-benar bersyukur karena semesta mempertemukan kita. Terima kasih sudah hadir, sudah bertahan, dan sudah menjadi alasan di balik begitu banyak senyum yang selalu muncul setiap kali aku mengingatmu.\n\nDi hari spesialmu ini, aku hanya ingin kamu tahu bahwa kamu sangat berharga. Semoga semua doa, harapan, dan impianmu satu per satu menjadi kenyataan. Semoga kamu selalu diberi kesehatan, kebahagiaan, dan dikelilingi oleh orang-orang yang tulus menyayangimu.\n\nTerima kasih sudah menjadi tempat pulang, tempat bercerita, dan seseorang yang selalu ingin aku perjuangkan. Bersamamu, hal-hal sederhana terasa begitu istimewa. Tawa kecilmu, perhatianmu, bahkan caramu memanggil namaku selalu berhasil membuatku jatuh cinta berulang kali.\n\nAku mungkin bukan orang yang sempurna, tapi aku berjanji akan selalu berusaha menjadi seseorang yang bisa membuatmu merasa dicintai setiap hari.\n\nKalau suatu saat nanti kamu lupa betapa berharganya dirimu, ingatlah bahwa akan selalu ada seseorang yang memandangmu sebagai anugerah terindah dalam hidupnya.\n\nHappy Birthday, cintaku. ❤️\n\nI love you.\nYesterday.\nToday.\nTomorrow.\nAnd Forever. 💕`,
   galleryImages: [
     {
